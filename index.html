@@ -494,6 +494,33 @@ html,body{opacity:1!important;visibility:visible!important}
       });
     }, 400);
   });
+</script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var pagamento = (q.get('pagamento') || '').toLowerCase();
+  if (!pagamento) return; // acesso direto: mantém os links como estão
+
+  var base = 'https://go.rodrigobaiao.com/pay/combo-criador-profissional';
+  var dados = new URLSearchParams();
+  ['name', 'email', 'phone', 'utm_source', 'utm_campaign'].forEach(function (k) {
+    if (q.get(k)) dados.set(k, q.get(k));
+  });
+  if (dados.get('phone')) dados.set('phone_local_code', '55');
+
+  var cartao = pagamento.indexOf('credit') > -1 || pagamento.indexOf('cart') > -1;
+  var link = cartao ? base + '/1click' : base + '?' + dados.toString();
+
+  function update() {
+    document.querySelectorAll('a[href*="combo-criador-profissional"]').forEach(function (a) {
+      a.href = link;
+    });
+  }
+  update();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', update);
+  }
+})();
 </script> </div>
 </div>
 </div>
