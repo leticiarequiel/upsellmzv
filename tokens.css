@@ -1,0 +1,538 @@
+/* ==========================================================================
+   Rodrigo Baião — Design System · tokens.css
+   Fonte única de verdade. Todo site/capa importa este arquivo.
+   Uso:  <link rel="stylesheet" href="tokens.css">
+   COR: site e comunicação usam UMA cor principal (taupe da logo, acento quente = pêssego).
+   data-product="..." é SÓ para as capas da plataforma de cursos (uma cor por produto).
+   ========================================================================== */
+
+
+/* ---------- Fontes (locais, em assets/fonts) ----------
+   Nesta página: woff2 só com os caracteres do português (subset), para carregar rápido. */
+@font-face { font-family: 'Poppins'; font-weight: 400; font-style: normal; font-display: swap; src: url('assets/fonts/Poppins-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 500; font-style: normal; font-display: swap; src: url('assets/fonts/Poppins-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 600; font-style: normal; font-display: swap; src: url('assets/fonts/Poppins-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 700; font-style: normal; font-display: swap; src: url('assets/fonts/Poppins-Bold.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 800; font-style: normal; font-display: swap; src: url('assets/fonts/Poppins-ExtraBold.woff2') format('woff2'); }
+@font-face { font-family: 'Merriweather'; font-weight: 300 900; font-style: italic; font-display: swap; src: url('assets/fonts/Merriweather-Italic-400.woff2') format('woff2'); }
+
+
+:root {
+  /* ---------- Marca (extraído da logo) ---------- */
+  /* Paleta oficial (a sua): #8A847F · #4A4744 · #C9C1B9 · #D6CEC5 · #B0A9A2 */
+  --sand-100: #f4efe8;   /* creme, fundo claro (extensão) */
+  --sand-200: #e6dfd6;   /* extensão */
+  --sand-300: #d6cec5;   /* oficial */
+  --sand-400: #b0a9a2;   /* oficial */
+  --sand-500: #c9c1b9;   /* oficial · taupe da logo */
+  --sand-700: #8a847f;   /* oficial · cinza médio da logo */
+  --graphite-700: #4a4744; /* oficial · grafite da logo */
+
+  /* ---------- Tons quentes (estética dos stories e acentos) ---------- */
+  --warm-100: #f3dcc3;   /* pêssego: segunda caixa dos stories */
+  --warm-300: #e2b98f;   /* areia dourada */
+  --warm-500: #c48a55;   /* caramelo */
+  --warm-700: #8d623b;   /* bronze */
+  --graphite-800: #2c2a28;
+  --ink-900: #141211;    /* preto quente, fundo escuro padrão */
+  --ink-800: #1c1a18;    /* cards no escuro */
+  --ink-700: #26231f;
+  --white: #ffffff;
+  --peach: var(--warm-100); /* caixa secundária dos stories (complemento, pergunta, aviso) */
+
+  /* ---------- Cores de produto: SÓ capas da plataforma de cursos ----------
+     Não usar em site, stories, posts ou Link Bio (lá vale a cor principal). */
+  --c-modo-criador: #36c65b;
+  --c-davinci:      #c9a27e;
+  --c-presets:      #d98a4e;
+  --c-zv-e10-i:     #4f8fe0;   /* azul · ZV-E10 Mark I  */
+  --c-zv-e10-ii:    #f2a93b;   /* âmbar · ZV-E10 Mark II (vendidos juntos, produtos separados) */
+  --c-iluminacao:   #eab25a;
+  --c-mentoria:     #8fa89a;
+  --c-favoritos:    #e8c547;
+  --c-wallpapers:   var(--warm-500);   /* caramelo dos wallpapers */
+
+  /* ---------- Cor principal da marca (default em tudo) ---------- */
+  --brand: #a68c75;               /* ouro quente: cor principal de site e comunicação (a do site DaVinci) */
+  --brand-light: #fdede2;         /* par claro do ouro: início dos degradês */
+  --brand-warm: var(--warm-100);  /* toque quente: destaques e segunda caixa dos stories */
+  --accent: var(--brand);
+  --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --accent-line: color-mix(in srgb, var(--accent) 40%, transparent);
+  --accent-ink: #7f6752;             /* tom do acento para TEXTO sobre fundo claro (contraste 4,6) */
+  --on-accent: var(--ink-900);       /* texto sobre botão de acento: passa 5.6+ em todos */
+
+  /* ---------- Papéis semânticos (tema escuro = padrão) ---------- */
+  --bg: var(--ink-900);
+  --surface: var(--ink-800);
+  --surface-2: var(--ink-700);
+  --text: #f4efe8;
+  --text-muted: #a9a29a;
+  --text-faint: #8a847d;
+  --border: rgba(244, 239, 232, .10);
+  --border-strong: rgba(244, 239, 232, .18);
+
+  /* ---------- Feedback (escuro | tinta p/ fundo claro) ---------- */
+  --success: #4ade80; --success-ink: #2a7248;
+  --danger:  #f26d5b; --danger-ink:  #b3392b;
+  --warning: #f0b24a; --warning-ink: #8a5c0d;
+  --info:    #6aa7f0; --info-ink:    #1f63bd;
+  --focus-ring: 2px solid var(--accent);
+
+  /* ---------- Tipografia ---------- */
+  --font-sans: 'Poppins', system-ui, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-story: 'Literature Insta', 'Merriweather', Georgia, serif;  /* só stories */
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --fs-xs: .75rem;   --fs-sm: .875rem;  --fs-md: 1rem;
+  --fs-lg: 1.25rem;  --fs-xl: 1.75rem;  --fs-2xl: 2.5rem; --fs-3xl: clamp(2.5rem, 6vw, 4.5rem);
+  --tracking-wide: .22em;   /* o espaçamento largo do wordmark, usar em rótulos */
+
+  /* ---------- Forma, espaço, sombra ---------- */
+  --radius-sm: 6px;
+  --radius: 10px;        /* mesmo raio da plataforma de cursos */
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 72px; --space-9: 112px;
+
+  /* ---------- Logo: escala de tamanhos (altura da horizontal, v4) ----------
+     A horizontal tem proporção ~3,75:1, então 32px de altura = ~120px de largura (mínimo). */
+  --logo-sm: 24px;   /* rodapé, e-mail, miniaturas */
+  --logo-md: 32px;   /* menu/topo de site e da plataforma (padrão) */
+  --logo-lg: 44px;   /* topo de página de apresentação, capa de documento */
+  --logo-xl: 64px;   /* tela de abertura, hero (máximo) */
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, .35);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ---------- Tema claro (Mentoria, Link Bio, páginas editoriais) ---------- */
+[data-theme="light"] {
+  --bg: var(--sand-100);
+  --surface: #fbf9f6;
+  --surface-2: var(--sand-200);
+  --text: var(--graphite-700);
+  --text-muted: #6b645e;
+  --text-faint: #8d867f;   /* só placeholder/desabilitado */
+  --border: rgba(74, 71, 68, .12);
+  --border-strong: rgba(74, 71, 68, .22);
+  --shadow-card: 0 10px 30px rgba(74, 71, 68, .12);
+}
+
+/* ---------- Seleção de produto ---------- */
+[data-product="modo-criador"] { --accent: var(--c-modo-criador); --accent-ink: #217a38; }
+[data-product="davinci"]      { --accent: var(--c-davinci); --accent-ink: #8d623b; }
+[data-product="presets"]      { --accent: var(--c-presets); --accent-ink: #a15923; }
+[data-product="zv-e10-i"]     { --accent: var(--c-zv-e10-i);  --accent-ink: #236ac5; }
+[data-product="zv-e10-ii"]    { --accent: var(--c-zv-e10-ii); --accent-ink: #975f0a; }
+[data-product="iluminacao"]   { --accent: var(--c-iluminacao); --accent-ink: #936113; }
+[data-product="mentoria"]     { --accent: var(--c-mentoria); --accent-ink: #587163; }
+[data-product="favoritos"]    { --accent: var(--c-favoritos); --accent-ink: #816810; }
+[data-product="wallpapers"]   { --accent: var(--c-wallpapers); --accent-ink: #926033; }
+
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 var(--fs-md)/1.6 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Tipografia ---------- */
+.display  { font: 700 var(--fs-3xl)/1.05 var(--font-sans); letter-spacing: -.02em; }
+.h1       { font: 600 var(--fs-2xl)/1.15 var(--font-sans); letter-spacing: -.015em; }
+.h2       { font: 600 var(--fs-xl)/1.25 var(--font-sans); }
+.h3       { font: 600 var(--fs-lg)/1.3 var(--font-sans); }
+.lead     { font: 300 var(--fs-lg)/1.7 var(--font-serif); color: var(--text-muted); }
+.quote    { font: italic 300 var(--fs-xl)/1.5 var(--font-serif); }
+.body     { font: 400 var(--fs-md)/1.7 var(--font-sans); color: var(--text-muted); }
+.eyebrow  { font: 600 var(--fs-xs)/1 var(--font-sans); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent); }
+.emph     { font-family: var(--font-serif); font-style: italic; font-weight: 400; } /* palavra em destaque dentro de um título */
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 14px 26px; border-radius: var(--radius-pill);
+  font: 600 var(--fs-sm)/1 var(--font-sans); letter-spacing: .02em;
+  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary   { background: var(--accent); color: var(--on-accent); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-ghost     { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- Logo ----------
+   <img class="logo" src="assets/logos-recortadas/PRINCIPAL_v4_recorte.png" alt="Rodrigo Baião">
+   Tamanhos: .logo--sm .logo--md (padrão) .logo--lg .logo--xl. Nunca maior que o título da página. */
+.logo { display: block; height: var(--logo-md); width: auto; }
+.logo--sm { height: var(--logo-sm); }
+.logo--lg { height: var(--logo-lg); }
+.logo--xl { height: var(--logo-xl); }
+
+/* ---------- Estados ---------- */
+.btn:focus-visible, .field:focus-visible, .link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn-primary:hover   { background: color-mix(in srgb, var(--accent) 88%, #fff); }
+.btn-secondary:hover { border-color: var(--accent); }
+.btn-ghost:hover     { background: color-mix(in srgb, var(--accent) 26%, transparent); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .4; cursor: not-allowed; transform: none; pointer-events: none; }
+.link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Campo ---------- */
+.field {
+  width: 100%; box-sizing: border-box; padding: 14px 16px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong); border-radius: var(--radius);
+  font: 400 var(--fs-md)/1.4 var(--font-sans);
+}
+.field::placeholder { color: var(--text-faint); }
+.field:focus { border-color: var(--accent); outline: none; }
+.field[aria-invalid="true"] { border-color: var(--danger); }
+
+/* ---------- Avisos ---------- */
+.notice { padding: 14px 16px; border-radius: var(--radius); border-left: 3px solid; font-size: var(--fs-sm); background: var(--surface); }
+.notice--success { border-color: var(--success); color: var(--success); }
+.notice--danger  { border-color: var(--danger);  color: var(--danger); }
+.notice--warning { border-color: var(--warning); color: var(--warning); }
+.notice--info    { border-color: var(--info);    color: var(--info); }
+
+[data-theme="light"]:not([data-product]) .btn-primary, [data-theme="light"]:not([data-product]) .btn-primary:hover { background: var(--graphite-700); color: var(--sand-100); }
+
+/* ---------- Tema claro: acento vira "tinta" para texto ---------- */
+[data-theme="light"] .eyebrow, [data-theme="light"] .tag, [data-theme="light"] .btn-ghost, [data-theme="light"] .link { color: var(--accent-ink); }
+[data-theme="light"] .notice--success { color: var(--success-ink); border-color: var(--success-ink); }
+[data-theme="light"] .notice--danger  { color: var(--danger-ink);  border-color: var(--danger-ink); }
+[data-theme="light"] .notice--warning { color: var(--warning-ink); border-color: var(--warning-ink); }
+[data-theme="light"] .notice--info    { color: var(--info-ink);    border-color: var(--info-ink); }
+
+/* ---------- Card e tag ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: var(--space-5);
+}
+.tag {
+  display: inline-block; padding: 6px 12px; border-radius: var(--radius-pill);
+  font: 600 var(--fs-xs)/1 var(--font-sans); letter-spacing: .12em; text-transform: uppercase;
+  background: var(--accent-soft); color: var(--accent);
+}
+
+/* ---------- Modelo de capa ----------
+   4 formatos que a plataforma pede (proporção exata):
+     .cover--horizontal  1200x768   .cover--vertical  300x580
+     .cover--square       400x400   .cover--circle     400x400 (recorte circular)
+   HTML:  <div class="cover cover--square" data-product="davinci">
+            <img class="cover__img" src="foto.jpg" alt="">
+            <div class="cover__in">
+              <div class="cover__label">Curso</div>
+              <h4 class="cover__title">Título</h4>
+              <p class="cover__sub">Subtítulo</p>
+              <div class="cover__bar"></div>
+            </div>
+          </div>
+   Para uma capa nova muda só: foto, textos e data-product.
+   Tamanhos em cqw: a capa escala igual em qualquer resolução de exportação. */
+.cover {
+  --pad: 6cqw; --t: 4.4cqw; --l: 1.5cqw; --s: 1.9cqw;
+  position: relative; overflow: hidden; isolation: isolate; container-type: inline-size;
+  background: var(--ink-800); color: #fff; border-radius: var(--radius);
+}
+.cover--horizontal { aspect-ratio: 1200 / 768; }
+.cover--vertical   { aspect-ratio: 300 / 580;  --pad: 9cqw; --t: 11cqw;  --l: 3.8cqw; --s: 5cqw; }
+.cover--square     { aspect-ratio: 1;          --pad: 8cqw; --t: 8.4cqw; --l: 2.8cqw; --s: 3.6cqw; }
+.cover--circle     { aspect-ratio: 1; border-radius: 50%;   --t: 9cqw;   --l: 3cqw;   --s: 4cqw; }
+
+.cover__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.cover__in {
+  position: absolute; inset: 0; box-sizing: border-box; padding: var(--pad);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.cover__in::before { /* gradiente para leitura do texto */
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgba(20,18,17,.92) 0%, rgba(20,18,17,.55) 45%, rgba(20,18,17,0) 80%);
+}
+.cover--circle .cover__in { padding: 20cqw; align-items: center; justify-content: center; text-align: center; }
+.cover--circle .cover__in::before { background: radial-gradient(circle at center, rgba(20,18,17,.78) 0%, rgba(20,18,17,.4) 70%, rgba(20,18,17,.12) 100%); }
+.cover__ver { /* selo de versão: produtos irmãos (ex. ZV-E10 I / II) */
+  position: absolute; top: var(--pad); left: var(--pad); padding: .8cqw 2cqw; border-radius: 99px;
+  background: var(--accent); color: var(--on-accent); font: 700 calc(var(--l) * 1.35)/1 var(--font-sans); letter-spacing: .12em; text-transform: uppercase;
+}
+.cover--circle .cover__ver { left: 50%; transform: translateX(-50%); top: 14cqw; }
+.cover__label { font: 600 var(--l)/1 var(--font-sans); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent); margin-bottom: 2.2cqw; }
+.cover__title { font: 700 var(--t)/1.08 var(--font-sans); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.cover__sub   { font: italic 300 var(--s)/1.4 var(--font-serif); color: rgba(244,239,232,.8); margin: 2cqw 0 0; }
+.cover__bar   { height: max(2px, .5cqw); width: 28%; background: var(--accent); border-radius: 2px; margin-top: 3cqw; }
+.cover--circle .cover__bar { width: 18%; }
+
+/* ---------- Stories (1080x1920) ----------
+   Estética extraída dos stories: foto vertical em tom quente, texto em Literature Insta (fonte exclusiva dos stories)
+   dentro de caixa escura; segunda caixa pêssego para complemento/pergunta/aviso.
+   Caixas no topo ou no terço inferior, rosto/objeto sempre livre.
+   Zona segura do Instagram: ~250px no topo e ~340px embaixo (23cqw / 31cqw).
+   HTML:  <div class="story">
+            <img class="story__img" src="foto.jpg" alt="">
+            <div class="story__in story__in--low">
+              <p class="story__box">Afirmação principal</p>
+              <p class="story__box story__box--peach">Complemento ou pergunta</p>
+            </div>
+          </div>
+   Variantes:  .story__in--top | --mid | --low   ·   .story--card (fundo liso escuro)   ·   .story--card-light */
+.story {
+  position: relative; overflow: hidden; isolation: isolate; container-type: inline-size;
+  aspect-ratio: 1080 / 1920; background: var(--ink-900); border-radius: var(--radius);
+}
+.story__img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; }
+.story__in {
+  position: absolute; inset: 0; box-sizing: border-box;
+  padding: 23cqw 8cqw 31cqw; display: flex; flex-direction: column; gap: 2cqw;
+}
+.story__in--top { justify-content: flex-start; }
+.story__in--mid { justify-content: center; }
+.story__in--low { justify-content: flex-end; }
+.story__box {
+  align-self: flex-start; max-width: 84cqw; margin: 0;
+  font: 400 3.3cqw/1.38 var(--font-story); color: var(--sand-100);
+  background: rgba(24, 21, 19, .86); padding: 2.2cqw 3.2cqw; border-radius: 1cqw;
+}
+.story__box--peach { background: var(--peach); color: var(--ink-900); font-size: 2.9cqw; }
+.story__box--center { align-self: center; text-align: center; }
+.story__box--lg { font-size: 4.2cqw; }
+.story--card .story__in, .story--card-light .story__in { justify-content: center; align-items: center; text-align: center; }
+.story--card .story__box, .story--card-light .story__box { background: none; padding: 0; align-self: center; font-size: 4.6cqw; max-width: 76cqw; }
+.story--card-light { background: var(--sand-200); }
+.story--card-light .story__box { color: var(--graphite-700); }
+
+/* ==========================================================================
+   Acabamento premium: brilho, sombra, degradê e vidro
+   Regra de ouro: CAPRICHAR EM UM ponto por tela (um brilho de fundo + um card
+   de vidro + o botão principal). Tudo em tons quentes; o brilho usa a cor
+   principal (taupe/pêssego) ou, nas capas da plataforma, a cor do produto.
+   ========================================================================== */
+:root {
+  /* sombras em camadas (mais naturais que uma sombra só) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.40), 0 4px 12px rgba(0,0,0,.25);
+  --shadow-md: 0 2px 4px rgba(0,0,0,.35), 0 12px 32px rgba(0,0,0,.35);
+  --shadow-lg: 0 4px 8px rgba(0,0,0,.35), 0 24px 64px rgba(0,0,0,.50);
+  --highlight: inset 0 1px 0 rgba(255,255,255,.08);   /* filete de luz no topo */
+  --surface-glass: rgba(28,26,24,.68);
+  --edge-1: rgba(244,239,232,.38);                    /* borda de vidro: ponto de luz */
+  --edge-2: rgba(244,239,232,.05);
+
+  /* degradês de marca */
+  --grad-metal: linear-gradient(135deg, #fdede2 0%, #d9b99b 48%, #a68c75 100%);   /* metal quente (ouro) */
+  --grad-metal-taupe: linear-gradient(135deg, #f3ece2 0%, var(--sand-500) 48%, #a89f95 100%);   /* versão neutra, taupe */
+  --grad-warm:  linear-gradient(135deg, var(--warm-100) 0%, var(--warm-300) 100%);
+  --grad-ink:   linear-gradient(180deg, var(--ink-800) 0%, var(--ink-900) 100%);
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+[data-theme="light"] {
+  --shadow-sm: 0 1px 2px rgba(74,71,68,.12), 0 4px 12px rgba(74,71,68,.08);
+  --shadow-md: 0 2px 4px rgba(74,71,68,.10), 0 12px 32px rgba(74,71,68,.14);
+  --shadow-lg: 0 4px 8px rgba(74,71,68,.10), 0 24px 64px rgba(74,71,68,.20);
+  --highlight: inset 0 1px 0 rgba(255,255,255,.9);
+  --surface-glass: rgba(251,249,246,.72);
+  --edge-1: rgba(255,255,255,.95);
+  --edge-2: rgba(74,71,68,.08);
+  --grad-metal: linear-gradient(135deg, #6a6460 0%, var(--graphite-700) 55%, #35322f 100%);
+}
+
+/* Fundo ambiente: brilho suave atrás do conteúdo (um por tela) */
+.ambient { position: relative; isolation: isolate; }
+.ambient::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  inset: -30% -10% auto -10%; height: 90%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 24%, transparent), transparent 75%);
+  filter: blur(30px);
+}
+.page-lux { background: radial-gradient(70% 45% at 50% -8%, color-mix(in srgb, var(--accent) 14%, transparent), transparent), var(--bg); }
+
+/* Texto em degradê e texto com brilho (só em UM título por tela) */
+.gradient-text { background: var(--grad-metal); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+[data-theme="light"] .gradient-text { background: var(--grad-metal); -webkit-background-clip: text; background-clip: text; }
+.glow-text { text-shadow: 0 0 28px color-mix(in srgb, var(--accent) 45%, transparent); }
+
+/* Brilho em volta de elementos */
+.glow    { box-shadow: var(--shadow-md), 0 0 48px color-mix(in srgb, var(--accent) 26%, transparent); }
+.glow-lg { box-shadow: var(--shadow-lg), 0 0 96px color-mix(in srgb, var(--accent) 32%, transparent); }
+
+/* Card de vidro com borda em degradê */
+.card--lux {
+  border: 1px solid transparent; border-radius: var(--radius-lg); padding: var(--space-5);
+  background:
+    linear-gradient(var(--surface-glass), var(--surface-glass)) padding-box,
+    linear-gradient(150deg, var(--edge-1), var(--edge-2) 38%, var(--edge-2) 62%, color-mix(in srgb, var(--accent) 45%, transparent)) border-box;
+  -webkit-backdrop-filter: blur(18px) saturate(1.25); backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow: var(--shadow-md), var(--highlight);
+}
+
+/* Botão principal vira metal com luz (substitui o chapado) */
+.btn-primary {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 86%, #fff) 0%, var(--accent) 52%, color-mix(in srgb, var(--accent) 82%, #000) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 1px 2px rgba(0,0,0,.35), 0 8px 24px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.btn-primary:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, #fff) 0%, color-mix(in srgb, var(--accent) 96%, #fff) 52%, var(--accent) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 1px 2px rgba(0,0,0,.35), 0 10px 32px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+[data-theme="light"]:not([data-product]) .btn-primary, [data-theme="light"]:not([data-product]) .btn-primary:hover {
+  background: linear-gradient(180deg, #5a5551 0%, var(--graphite-700) 55%, #35322f 100%); color: var(--sand-100);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 1px 2px rgba(0,0,0,.25), 0 8px 24px rgba(74,71,68,.28);
+}
+
+/* Divisor com fade nas pontas */
+.divider { height: 1px; border: 0; margin: var(--space-6) 0; background: linear-gradient(90deg, transparent, var(--border-strong) 25%, var(--border-strong) 75%, transparent); }
+.divider--accent { background: linear-gradient(90deg, transparent, var(--accent-line) 30%, var(--accent) 50%, var(--accent-line) 70%, transparent); }
+
+/* Selo "metal" para etiquetas especiais (ex.: Novo, Ao vivo) */
+.badge-metal {
+  display: inline-block; padding: 7px 14px; border-radius: var(--radius-pill);
+  font: 700 var(--fs-xs)/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase;
+  background: var(--grad-metal); color: var(--ink-900); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 4px 14px rgba(0,0,0,.3);
+}
+[data-theme="light"] .badge-metal { color: var(--sand-100); }
+
+/* Grão de filme: textura sutil sobre fundos lisos e fotos */
+.grain { position: relative; isolation: isolate; }
+.grain::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: var(--grain); opacity: .07; mix-blend-mode: overlay; border-radius: inherit; }
+
+/* Capa premium: filete de luz + brilho de cor no pé da capa + grão */
+.cover--lux { box-shadow: var(--shadow-lg); }
+.cover--lux .cover__in { border-radius: inherit; }
+.cover--lux .cover__in::after {   /* no filho: cqw só funciona dentro do container */
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(244,239,232,.14), inset 0 -22cqw 28cqw -14cqw color-mix(in srgb, var(--accent) 38%, transparent);
+  background-image: var(--grain); background-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ==========================================================================
+   Fundo quadriculado (receita do site MZV: linhas de 1px a cada 40px, quase
+   invisíveis, com máscara que apaga o desenho nas bordas)
+   Uso:  <section class="has-grid"> ... </section>
+         .has-grid--fine (20px) · .has-grid--bold (64px) · .has-grid--accent (linha na cor do produto/marca)
+         .has-grid--fixed: cobre a tela inteira e fica parado ao rolar (como no site do MZV)
+   Combina com .ambient (brilho quente) para o efeito completo.
+   ========================================================================== */
+:root {
+  --grid-size: 40px;
+  --grid-line: rgba(244, 239, 232, .06);      /* tema escuro: creme a 6% */
+}
+[data-theme="light"] { --grid-line: rgba(74, 71, 68, .07); }  /* tema claro: grafite a 7% (o MZV usa preto a 4%) */
+
+.has-grid { position: relative; isolation: isolate; }
+.has-grid::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-size: var(--grid-size) var(--grid-size);
+  background-image:
+    linear-gradient(to right,  var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+          mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+.has-grid--fine   { --grid-size: 20px; }
+.has-grid--bold   { --grid-size: 64px; }
+.has-grid--accent { --grid-line: color-mix(in srgb, var(--accent) 16%, transparent); }
+.has-grid--fixed::after { position: fixed; }
+.has-grid--solid::after { -webkit-mask-image: none; mask-image: none; }   /* sem fade nas bordas */
+
+/* ==========================================================================
+   Carrossel e post do Instagram (1080 x 1350, proporção 4:5)
+   HTML:
+     <div class="slide slide--capa">                  (ou slide--texto, --destaque, --numero, --cta)
+       <img class="slide__img" src="foto.jpg" alt="">  (só nos slides com foto)
+       <div class="slide__in">
+         <span class="slide__num">01/07</span>  <span class="slide__handle">@rodrigobaiaoo</span>
+         <div class="slide__label">Guia</div>
+         <h3 class="slide__title">Título com <span class="emph">destaque</span></h3>
+         <p class="slide__text">Texto de apoio</p>
+         <span class="slide__swipe">Arraste →</span>
+       </div>
+     </div>
+   Tema claro: <div class="slide ..." data-theme="light">
+   Margem de segurança de 8cqw: o perfil do Instagram corta o 4:5 em 3:4 nas bordas.
+   Tudo em cqw, então exporta igual em qualquer resolução.
+   ========================================================================== */
+.slide {
+  position: relative; overflow: hidden; isolation: isolate; container-type: inline-size;
+  aspect-ratio: 1080 / 1350; background: var(--bg); color: var(--text); border-radius: var(--radius);
+}
+.slide__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.slide__in {
+  position: absolute; inset: 0; box-sizing: border-box; padding: 9cqw 8cqw;
+  display: flex; flex-direction: column; justify-content: center;
+}
+/* fundo liso: quadriculado do MZV + brilho quente */
+.slide__in::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-size: 3.7cqw 3.7cqw;
+  background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%); mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+.slide__in::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none; width: 90cqw; height: 90cqw; left: 5cqw; top: -34cqw;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 20%, transparent), transparent 72%); filter: blur(3cqw);
+}
+/* slides com foto: sombra para leitura no lugar da grade */
+.slide--capa .slide__in, .slide--foto .slide__in { justify-content: flex-end; padding-bottom: 20cqw; }
+.slide--capa .slide__in::before, .slide--foto .slide__in::before {
+  background-size: auto; -webkit-mask-image: none; mask-image: none;
+  background-image: linear-gradient(to top, rgba(20,18,17,.94) 0%, rgba(20,18,17,.62) 42%, rgba(20,18,17,0) 78%);
+}
+.slide--capa .slide__in::after, .slide--foto .slide__in::after { display: none; }
+
+.slide__num, .slide__handle, .slide__swipe {
+  position: absolute; font: 500 2.3cqw/1 var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted);
+}
+.slide__num    { top: 8cqw; left: 8cqw; }
+.slide__handle { top: 8cqw; right: 8cqw; letter-spacing: .06em; text-transform: none; }
+.slide__swipe  { bottom: 8cqw; right: 8cqw; }
+.slide--capa .slide__num, .slide--capa .slide__handle, .slide--capa .slide__swipe, .slide--foto .slide__num, .slide--foto .slide__handle, .slide--foto .slide__swipe { color: rgba(244,239,232,.75); }
+
+.slide__label { font: 600 2.3cqw/1 var(--font-sans); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--accent); margin-bottom: 3.4cqw; }
+[data-theme="light"].slide .slide__label, [data-theme="light"] .slide__label { color: var(--accent-ink); }
+.slide__title { font: 700 7.6cqw/1.08 var(--font-sans); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+.slide__title .emph { font-weight: 400; }
+.slide__text  { font: 400 3.5cqw/1.55 var(--font-sans); color: var(--text-muted); margin: 4cqw 0 0; max-width: 78cqw; }
+.slide__bar   { height: .6cqw; width: 14cqw; border-radius: 1cqw; background: var(--accent); margin-top: 5cqw; }
+
+/* destaque: citação grande em Merriweather */
+.slide--destaque .slide__in { justify-content: center; }
+.slide__quote { font: italic 300 6.2cqw/1.36 var(--font-serif); margin: 0; text-wrap: balance; }
+.slide__quote::before { content: "\201C"; display: block; font: 700 18cqw/.6 var(--font-sans); color: var(--accent); margin-bottom: 4cqw; }
+[data-theme="light"] .slide__quote::before { color: var(--accent-ink); }
+.slide__by { font: 600 2.4cqw/1 var(--font-sans); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-muted); margin-top: 6cqw; }
+
+/* número grande: passos, listas e dicas */
+.slide__big { font: 800 30cqw/.9 var(--font-sans); letter-spacing: -.05em; margin: 0 0 3cqw -1cqw; background: var(--grad-metal); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* chamada final */
+.slide--cta .slide__in { align-items: flex-start; }
+.slide__pill {
+  display: inline-block; margin-top: 7cqw; padding: 2.6cqw 6cqw; border-radius: 99px;
+  font: 600 3.1cqw/1 var(--font-sans); letter-spacing: .02em; color: var(--on-accent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 86%, #fff), var(--accent) 52%, color-mix(in srgb, var(--accent) 82%, #000));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 1cqw 3cqw color-mix(in srgb, var(--accent) 25%, transparent);
+}
+[data-theme="light"]:not([data-product]).slide .slide__pill { background: linear-gradient(180deg, #5a5551, var(--graphite-700) 55%, #35322f); color: var(--sand-100); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 1cqw 3cqw rgba(74,71,68,.28); }
+
+/* ==========================================================================
+   Celular (até 640px): tipografia menor, espaços mais compactos e toque confortável
+   ========================================================================== */
+@media (max-width: 640px) {
+  :root {
+    --fs-2xl: 1.875rem;   /* 30px (antes 40px) */
+    --fs-xl:  1.5rem;     /* 24px (antes 28px) */
+    --fs-lg:  1.125rem;
+    --space-7: 36px; --space-8: 48px; --space-9: 72px;
+  }
+  .h1 { font-weight: 600; }
+  .lead { font-size: 1.0625rem; }
+  .btn { min-height: 48px; padding: 14px 22px; }          /* alvo de toque de 48px */
+  .card, .card--lux { padding: var(--space-4); }
+  .eyebrow { letter-spacing: .12em; }
+}
